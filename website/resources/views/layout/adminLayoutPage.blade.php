@@ -10,7 +10,14 @@
     <div class="main-content">
         @include("partial.sidebar")
         @include("partial.header")
-        @yield('content')
+
+        <div id="page-wrapper">
+            <div class="main-page">
+                @yield('content')
+            </div>
+        </div>
+
+
         @include("partial.footer")
     </div>
 
