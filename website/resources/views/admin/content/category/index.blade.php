@@ -3,14 +3,13 @@
     <div class="tables">
         <div class="table-responsive bs-example widget-shadow">
             <h4>Danh sách danh mục:</h4>
-            <a href="#"><button type="button" class="btn btn-success">Thêm danh mục</button></a>
+            <a href="{{route('admin.category.add')}}"><button type="button" class="btn btn-success">Thêm danh mục</button></a>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>ID</th>
                         <th>Tên danh mục</th>
-                        <th>Slug</th>
-                        <th>Icon</th>
+                        <th>URL</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -18,19 +17,34 @@
                     @foreach($categories as $item)
                         <tr>
                             <th scope="row">{{$item->id }}</th>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->slug}}</td>
+                            <td>{{$item->category_name}}</td>
+                            <td>{{$item->category_slug}}</td>
+
                             <td>
-                                <img src="{{$item->icon}}" style="width:50px;height: 50px" alt=""/>
-                            </td>
-                            <td>
-                                <a href="#">Sửa</a>
-                                <a href="#">Xóa</a>
+                                <a href="{{route('admin.category.edit',$item->id )}}">Sửa</a>
+                                <a href="{{route('admin.category.destroy',$item->id )}}"
+                                   onclick="return confirm('Bạn có muốn xóa không?');">Xóa</a>
                             </td>
                         </tr>
+                        @foreach($sub_categories as $sub_category)
+                            @if($sub_category->category_parent_id == $item->id)
+                                <tr>
+                                    <th scope="row">{{$sub_category->id }}</th>
+                                    <td>---- {{$sub_category->category_name}}</td>
+                                    <td>{{$sub_category->category_slug}}</td>
+                                    <td>
+                                        <a href="{{route('admin.category.edit',$sub_category->id )}}">Sửa</a>
+                                        <a href="{{route('admin.category.destroy',$sub_category->id )}}"
+                                           onclick="return confirm('Bạn có muốn xóa không?');"
+                                        >Xóa</a>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>
+            {{$categories->links()}}
         </div>
     </div>
 @endsection
