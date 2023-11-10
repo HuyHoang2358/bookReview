@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -14,12 +15,24 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => fake()->name(),
-            'slug' => fake()->slug(),
-            'icon' => fake()->imageUrl(),
-            'status' =>fake()->boolean(),
-            'parent_id' => 0,
-        ];
+        $num_category = Category::count();
+        $random_number = fake()->randomNumber(1);
+
+        if ($num_category >0 and $random_number < 3){
+            return [
+                'category_name' => fake()->name(),
+                'category_slug' => fake()->slug(),
+                'category_parent_id' =>
+                    Category::all()->random()->id
+            ];
+        }
+        else{
+            return [
+                'category_name' => fake()->name(),
+                'category_slug' => fake()->slug(),
+                'category_parent_id' => 0
+            ];
+        }
+
     }
 }

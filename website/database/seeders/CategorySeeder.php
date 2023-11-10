@@ -13,9 +13,9 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        // Overriding Attributes
-        $category = Category::factory()->count(1)->create([
-            'name' => 'TechMaster',
-        ]);
+        for($i =0; $i<=20; $i++){
+            $categories = Category::factory()->count(1)->create();
+        }
+
     }
 }
