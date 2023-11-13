@@ -31,8 +31,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [CategoryController::class,'edit'])->name('admin.category.edit'); // Trả về form edit category
         Route::post('/edit/{id}', [CategoryController::class,'update'])->name('admin.category.update'); // Update category
         Route::get('/delete/{id}', [CategoryController::class,'destroy'])->name('admin.category.destroy'); // delete category
-
-
     });
 });
 

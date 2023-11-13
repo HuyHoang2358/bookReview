@@ -20,9 +20,7 @@
                         <label for="categoryParentId">Danh mục cha</label>
                         <select class="form-control" id="categoryParentId" name="category_parent_id">
                             <option value="0">Không có danh mục cha</option>
-                            @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->category_name}}</option>
-                            @endforeach
+                            @include('admin.content.category.category_option', ["categories" =>$categories, 'level' => 0])
                         </select>
                     </div>
 

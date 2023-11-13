@@ -14,37 +14,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($categories as $item)
-                        <tr>
-                            <th scope="row">{{$item->id }}</th>
-                            <td>{{$item->category_name}}</td>
-                            <td>{{$item->category_slug}}</td>
-
-                            <td>
-                                <a href="{{route('admin.category.edit',$item->id )}}">Sửa</a>
-                                <a href="{{route('admin.category.destroy',$item->id )}}"
-                                   onclick="return confirm('Bạn có muốn xóa không?');">Xóa</a>
-                            </td>
-                        </tr>
-                        @foreach($sub_categories as $sub_category)
-                            @if($sub_category->category_parent_id == $item->id)
-                                <tr>
-                                    <th scope="row">{{$sub_category->id }}</th>
-                                    <td>---- {{$sub_category->category_name}}</td>
-                                    <td>{{$sub_category->category_slug}}</td>
-                                    <td>
-                                        <a href="{{route('admin.category.edit',$sub_category->id )}}">Sửa</a>
-                                        <a href="{{route('admin.category.destroy',$sub_category->id )}}"
-                                           onclick="return confirm('Bạn có muốn xóa không?');"
-                                        >Xóa</a>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
-                    @endforeach
+                    @include("admin.content.category.row_table",["categories"=>$categories, "level"=>0])
                 </tbody>
             </table>
-            {{$categories->links()}}
         </div>
     </div>
 @endsection

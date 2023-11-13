@@ -10,15 +10,11 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     public function index(){
-        $categories = DB::table('categories')
-            ->where("category_parent_id","=",0)->paginate(6);
-
-        $sub_categories = DB::table("categories")
-            ->where("category_parent_id", ">", 0)->get();
-        return view("admin.content.category.index",["categories"=>$categories, "sub_categories"=>$sub_categories]);
+        $categories = Category::where('category_parent_id','=',0)->with('childs')->get();
+        return view("admin.content.category.index",["categories"=>$categories, ]);
     }
     public function add(){
-        $categories = DB::table("categories")->where("category_parent_id","=", 0)->get();
+        $categories = Category::where('category_parent_id','=',0)->with('childs')->get();
         return view("admin.content.category.add", ["categories"=>$categories]);
     }
     public function store(Request $request){
