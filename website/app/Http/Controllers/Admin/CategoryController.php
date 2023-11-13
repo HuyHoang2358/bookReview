@@ -31,7 +31,7 @@ class CategoryController extends Controller
     }
     public function edit($id){
         $item = Category::find($id);
-        $categories = DB::table("categories")->where("category_parent_id","=", 0)->get();
+        $categories = Category::where('category_parent_id','=',0)->with('childs')->get();
         return view("admin.content.category.edit", ["categories"=>$categories, "item"=>$item]);
     }
     public function update(Request $request, $id){

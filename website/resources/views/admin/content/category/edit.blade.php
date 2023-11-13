@@ -20,13 +20,7 @@
                         <label for="categoryParentId">Danh mục cha</label>
                         <select class="form-control" id="categoryParentId" name="category_parent_id">
                             <option value="0">Không có danh mục cha</option>
-                            @foreach($categories as $category)
-                                @if($item->category_parent_id == $category->id)
-                                    <option value="{{$category->id}}" selected>{{$category->category_name}}</option>
-                                @else
-                                    <option value="{{$category->id}}">{{$category->category_name}}</option>
-                                @endif
-                            @endforeach
+                            @include("admin.content.category.category_selected_option", ["categories"=>$categories, "level"=>0, "item"=>$item])
                         </select>
                     </div>
 
