@@ -46,10 +46,20 @@ class CategoryController extends Controller
 
         return redirect()->route("admin.category.index");
     }
-    public function destroy($id){
+
+    public function deleteChilds($id){
         $item = Category::find($id);
-        if($item)
+        if($item){
+            if ($item->childs){
+                foreach ($item->childs as $child){
+                    $this->deleteChilds($child->id);
+                }
+            }
             $item->delete();
+        }
+    }
+    public function destroy($id){
+        $this->deleteChilds($id);
         return redirect()->route("admin.category.index");
     }
 }
