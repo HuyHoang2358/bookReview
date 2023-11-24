@@ -11,7 +11,7 @@ class Category extends Model
     use HasFactory;
 
     public function parentCategory(){
-        return $this->belongsTo(Category::class, "category_parent_id");
+        return $this->belongsTo(Category::class, "category_parent`_id");
     }
 
     public function childs():HasMany{

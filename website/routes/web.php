@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +26,12 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/',[AdminController::class,'index'])->name("admin.index");
+    Route::get('/register',[RegisterController::class,'showAdminRegistrationForm'])->name("admin.auth.register");
+    Route::post('/register',[RegisterController::class,'storeAdminAccount'])->name("admin.auth.register.store");
+    Route::get('/login',[LoginController::class,'showAdminLoginForm'])->name("admin.auth.login");
+    Route::post('/login',[LoginController::class,'adminLogin'])->name("admin.auth.login.store");
+
+
 
     Route::group(['prefix' => 'category'], function () {
         Route::get('/',[CategoryController::class,'index'])->name("admin.category.index"); // danh sách danh mục
@@ -34,3 +43,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
