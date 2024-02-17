@@ -123,6 +123,10 @@
       <excludeFolder url="file://$MODULE_DIR$/website/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/website/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/website/vendor/laravel/ui" />
+      <excludeFolder url="file://$MODULE_DIR$/website/vendor/alexusmai/laravel-file-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/website/vendor/intervention/image" />
+      <excludeFolder url="file://$MODULE_DIR$/website/vendor/intervention/imagecache" />
+      <excludeFolder url="file://$MODULE_DIR$/website/vendor/opis/closure" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

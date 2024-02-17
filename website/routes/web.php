@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +50,20 @@ Route::group(['prefix' => 'admin',  'middleware' => ['auth:admin']], function ()
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/tinymce', function () {
+    return view('tinymce');
+});
+
+Route::get('/add', [PostController::class,'add'])->name('post.add'); // Trả về form thêm mới
+Route::post('/add', [PostController::class,'store'])->name('post.store'); // tạo mới category
+Route::get('/detail/{id}', [PostController::class,'detail'])->name('post.detail'); // tạo mới category
+Route::get('/edit/{id}', [PostController::class,'edit'])->name('post.edit'); // tạo mới category
+Route::post('/edit/{id}', [PostController::class,'update'])->name('post.update'); // tạo mới category
+
+Route::get('/media', [HomeController::class,'media']); // Trả về form thêm mới
+
+Route::get("/user/{id}",  [HomeController::class,'userInfo']);
+Route::get("/avatar/{id}",  [HomeController::class,'avatarInfo']);
+
